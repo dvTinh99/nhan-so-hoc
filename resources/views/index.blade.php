@@ -236,7 +236,7 @@
         <div class="container" id="ket_qua">
             <!-- <div class="container" id="ket_qua" style="display:none"> -->
             <div class="divider-text">
-                <img src="./images/logo1.png" width="32" height="32">
+                <img src="{{ asset('images/logo1.png') }}" width="32" height="32">
             </div>
             <div class="row">
                 <div class="col-12">

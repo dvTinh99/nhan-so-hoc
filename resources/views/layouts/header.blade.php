@@ -12,9 +12,11 @@
     <meta name="author" content="VHL">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/dashforge.css" rel="stylesheet">
-    <link href="css/form.css" rel="stylesheet">
+    {{-- <link href="css/dashforge.css" rel="stylesheet">
+    <link href="css/form.css" rel="stylesheet"> --}}
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dashforge.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/form.css') }}" rel="stylesheet">
 
 </head>
 
@@ -36,7 +38,7 @@
         <div class="container d-flex align-items-center">
             <h1 class="logo mr-auto">
                 <a href="{{ route('index') }}">
-                    <img src="./images/logo1.png">
+                    <img src="{{ asset('images/logo1.png') }}">
                     <span class="tx-16">
                         Nhân Số Học
                     </span>
@@ -49,28 +51,28 @@
                     <li class="drop-down">
                         <a href="###">Số chủ đạo</a>
                         <ul>
-                            <li><a href="sochudao.html">Cách tìm số chủ đạo</a></li>
-                            <li><a href="ynghiasochudao.html">Ý nghĩa số chủ đạo</a></li>
+                            <li><a href="{{ route('pages.so_chu_dao') }}">Cách tìm số chủ đạo</a></li>
+                            <li><a href="{{ route('pages.y-nghia-so-chu-dao') }}">Ý nghĩa số chủ đạo</a></li>
 
                         </ul>
                     </li>
                     <li class="drop-down">
                         <a href="####">Biểu đồ ngày sinh</a>
                         <ul>
-                            <li><a href="bieudongaysinh.html">Ý nghĩa biểu đồ ngày sinh</a></li>
-                            <li><a href="ynghiaconso.html">Ý nghĩa các con số trên biểu đồ</a></li>
-                            <li><a href="ynghiatrentrucso.html">Ý nghĩa các mũi tên trên trục số</a></li>
+                            <li><a href="/bieu-do-ngay-sinh">Ý nghĩa biểu đồ ngày sinh</a></li>
+                            <li><a href="/y-nghia-con-so">Ý nghĩa các con số trên biểu đồ</a></li>
+                            <li><a href="/y-nghia-mui-ten">Ý nghĩa các mũi tên trên trục số</a></li>
 
                         </ul>
                     </li>
                     <li class="drop-down">
                         <a href="####">Sức mạnh của tên</a>
                         <ul>
-                            <li><a href="https://nhansohoc.xyz/SinhTracVanTay">Số linh hồn, biểu đạt,tên riêng</a>
+                            <li><a href="/so-linh-hon-bieu-dat-ten-rieng">Số linh hồn, biểu đạt,tên riêng</a>
                             </li>
-                            <li><a href="https://nhansohoc.xyz/SinhTracVanTay">Ý nghĩa số linh hồn</a>
+                            <li><a href="/y-nghia-so-linh-hon">Ý nghĩa số linh hồn</a>
                             </li>
-                            <li><a href="https://nhansohoc.xyz/SinhTracVanTay">Ý nghĩa số biểu đạt</a></li>
+                            <li><a href="/y-nghia-so-bieu-dat">Ý nghĩa số biểu đạt</a></li>
 
                         </ul>
                     </li>
@@ -107,11 +109,11 @@
                                             <a> {{ Auth::user()->email }}</a>
                                             <a> Số lượt tra cứu: <strong class="text-primary">0
                                                     lượt</strong></a>
-                                            <a href="lichsutracuu-user.html"> Xem lịch sử tra
+                                            <a href="/lich-su-tra-cuu"> Xem lịch sử tra
                                                 cứu</a>
-                                            <a href="lichsuthanhtoan-user.html"> Xem lịch sử thanh
+                                            <a href="/lich-su-thanh-toan"> Xem lịch sử thanh
                                                 toán</a>
-                                            <a href="doimatkhau.html"> Đổi mật khẩu</a>
+                                            <a href="/doi-mat-khau"> Đổi mật khẩu</a>
                                             <a href="{{ route('logout') }}"> Đăng xuất</a>
                                         </div>
                                     </div>
@@ -142,8 +144,8 @@
 
                     <div class="collapse" id="components-collapse">
                         <ul class="list-unstyled fw-normal ">
-                            <li><a href="sochudao.html">Cách tìm số chủ đạo</a></li>
-                            <li><a href="ynghiasochudao.html">Ý nghĩa số chủ đạo</a></li>
+                            <li><a href="{{ route('pages.so_chu_dao') }}">Cách tìm số chủ đạo</a></li>
+                            <li><a href="{{ route('pages.y-nghia-so-chu-dao') }}">Ý nghĩa số chủ đạo</a></li>
 
                         </ul>
                     </div>
