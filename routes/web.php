@@ -86,6 +86,9 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/quan-li-tra-cuu', function () {
         return view('pages.admin.quan-li-tra-cuu');
     });
+    Route::get('/quan-li-thanh-toan', function () {
+        return view('pages.admin.quan-li-thanh-toan');
+    });
 
     Route::get('/user/delete/{id}', [AdminController::class, 'deleteUser'])->name('user.delete');
 });

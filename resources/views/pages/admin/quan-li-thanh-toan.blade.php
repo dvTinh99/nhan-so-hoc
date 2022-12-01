@@ -1,35 +1,37 @@
 @include('layouts.header')
 <div class="" style="margin: 120px 0px;align-items: center;">
     <div class="history-title mt-10">
-        <h3 class="title font2 text-center">Quản lý tra cứu</h3>
+        <h3 class="title font2 text-center">Lịch sử thanh toán</h3>
     </div>
 
     <div class="row justify-content-center my-5">
         <div class="col-12 col-md-12">
             <div class="tbl-history" style="overflow: scroll;">
-                <table class=" table table-borderless text-center">
+                <table class="table table-borderless text-center">
                     <thead class="table-light">
                         <tr>
                             <td><strong>#</strong></td>
                             <td><strong>Tên</strong></td>
-                            <td><strong>Ngày sinh</strong></td>
-                            <td><strong>Ngày tra cứu</strong></td>
+                            <td><strong>SĐT</strong></td>
+                            <td><strong>Gói</strong></td>
+                            <td><strong>Lượt tra cứu</strong></td>
+                            <td><strong>Số tiền</strong></td>
                             <td><strong>Trạng thái</strong></td>
-                            <td><strong>Xem báo cáo</strong></td>
-                            <td><strong>Gửi </strong></td>
+                            <td><strong>Ngày thanh toán</strong></td>
+                            <td><strong>Xác nhận</strong></td>
                             <td><strong>Xóa</strong></td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>Võ Van nhó</td>
-                            <td>24/02/1998</td>
-                            <td>05/11/2022</td>
-                            <td><span class="text-danger"> Chưa gửi </span></td>
-                            <td>
-                                <a href="https://xemthanso.vn/thong-tin/5yM0jZG41v">Tra cứu</a>
-                            </td>
+                            <td>Vo Van Nho</td>
+                            <td>0814213949</td>
+                            <td>Gói 1</td>
+                            <td>1</td>
+                            <td>119,000</td>
+                            <td><span class="text-danger">Đang xử lý</span></td>
+                            <td>08/11/2022</td>
                             <td><svg style="width: 20px; color: green;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                                     <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 011.04-.208z" clip-rule="evenodd"></path>
                                 </svg>
@@ -40,9 +42,11 @@
                                 </svg>
                             </td>
                         </tr>
-
                     </tbody>
                 </table>
+                <div>
+
+                </div>
             </div>
         </div>
     </div>
