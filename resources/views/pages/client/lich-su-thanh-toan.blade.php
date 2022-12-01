@@ -76,7 +76,7 @@
                                 cứu</a></li>
                         <li><a href="lichsuthanhtoan-user.html">Xem lịch sử thanh toán</a></li>
                         <li><a href="doimatkhau.html">Đổi mật khẩu</a></li>
-                        <li><a href="login.html"> Đăng xuất</a></li>
+                        <li><a href="/dang-nhap"> Đăng xuất</a></li>
                     </ul>
                 </div>
             </li>

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ForgotPasswordMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -16,7 +18,7 @@ class UserController extends Controller
             $request->validate([
                 'name' => 'required',
                 'email' => 'required|email|unique:users',
-                'password' => 'required|min:6',
+                'password' => 'required',
             ]);
 
             $data = $request->all();
@@ -28,7 +30,7 @@ class UserController extends Controller
                };
             }
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            return redirect()->back()->whth('error', $e->getMessage);
         }
 
     }
@@ -38,7 +40,7 @@ class UserController extends Controller
         if($this->checkLogin($request)) {
             return redirect()->route('index');
         } else {
-            dd('Login details are not valid');
+            return redirect()->route('login')->with('error', 'Sai tên đăng nhập hoặc mật khâủ');
         }
     }
 
@@ -56,7 +58,7 @@ class UserController extends Controller
             }
             return false;
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            return false;
         }
     }
 
@@ -75,5 +77,49 @@ class UserController extends Controller
         Auth::logout();
 
         return redirect()->route('index');
+    }
+
+    public function changePassword(Request $request)
+    {
+        try {
+            $request->validate([
+                'current_password' =>'required',
+                'new_password' =>'required',
+                'new_password_confirmation' =>'required|same:new_password'
+            ]);
+            $user = User::find(Auth::user()->id);
+            $credentials = ['email' => $user->email, 'password' => $request->current_password];
+            if (Auth::attempt($credentials)) {
+                $user->update([
+                    'password' => Hash::make($request->new_password)
+                ]);
+                return redirect()->route('index');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function forgotPassword(Request $requests)
+    {
+        $user = User::where('email', $requests->email)->first();
+        if($user) {
+            $newPass = rand(0, 999999);
+            $user->update([
+                'password' => Hash::make($newPass)
+            ]);
+            $details = [
+                'title' => 'Mail from dvtinh99',
+                'body' => $newPass
+            ];
+
+            try {
+                Mail::to($requests->email)->send(new ForgotPasswordMail($details));
+                return redirect()->back()->with('success', 'Vui lòng kiểm tra email !');
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        }
+        return redirect()->back()->with('error', 'Tài khoản không tồn tại');
     }
 }

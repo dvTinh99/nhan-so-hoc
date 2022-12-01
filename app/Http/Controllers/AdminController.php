@@ -10,4 +10,10 @@ class AdminController extends Controller
         $users = User::all();
         return view('pages.admin.quan-li-tai-khoan', compact('users'));
     }
+
+    public function deleteUser($id)
+    {
+        User::destroy($id);
+        return redirect()->back();
+    }
 }

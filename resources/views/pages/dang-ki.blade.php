@@ -41,7 +41,11 @@
                     <form action="{{ route('register') }}" method="post" id="form-register">
                         @csrf
                         <h3 class="text-center text-uppercase font2 mb-3 bold700">Đăng ký tài khoản</h3>
-
+                        @if(Session::get('error'))
+                            <div class="alert alert-danger">
+                                {{ Session::get('error') }}
+                            </div>
+                        @endif
                         <div class="form-info mb-3">
                             <input type="text" required="" class="form-control" name="name" placeholder="Nhập Tên">
                             <div id="error_last_name_register" class="input-error text-left mt-1 justify-content-center"
@@ -97,7 +101,7 @@
 
                         <div class="text-center p-2">
                             <span>Bạn đã có tài khoản? </span>
-                            <a href="login.html" style="margin-right: 5px;">Đăng
+                            <a href="/dang-nhap" style="margin-right: 5px;">Đăng
                                 Nhập</a>
                         </div>
                     </form>

@@ -38,24 +38,29 @@
                     <div class="logo-modal">
                         <img src="https://xemthanso.vn/storage/12345-1.png" alt="Xem thần số">
                     </div>
-                    <form action="https://xemthanso.vn/register" method="post" id="form-register">
+                    <form action="{{ route('change-password') }}" method="POST" id="form-change-password">
+                        @csrf
                         <h3 class="text-center text-uppercase font2 mb-3 bold700">Đổi mật khẩu</h3>
-                        <input type="hidden" name="_token" value="9zqAJYmzepw1dlCkJbkraGkrM09gpe0wHOoAOOhu">
+                        @if(Session::get('error'))
+                            <div class="alert alert-danger">
+                                {{ Session::get('error') }}
+                            </div>
+                        @endif
                         <div class="form-info mb-3">
-                            <input type="text" required="" class="form-control" name="password"
+                            <input type="text" required="" class="form-control" name="current_password"
                                 placeholder="Nhập mật khẩu cũ ">
                         </div>
                         <div class="form-info mb-3">
-                            <input type="text" required="" class="form-control" name="new-password"
+                            <input type="text" required="" class="form-control" name="new_password"
                                 placeholder="Nhập mật khẩu mới ">
 
                         </div>
                         <div class="form-info mb-3 eyes">
                             <input id="password_register" type="password" required="" class="form-control"
-                                name="new-password" placeholder="Nhập lại mật khẩu mới">
+                                name="new_password_confirmation" placeholder="Nhập lại mật khẩu mới">
                         </div>
                         <div class="d-flex justify-content-center">
-                            <button type="button" class="btn btn-primary btn-submit" id="register-form">Xác
+                            <button type="submit" class="btn btn-primary btn-submit" id="register-form">Xác
                                 nhận</button>
                         </div>
 

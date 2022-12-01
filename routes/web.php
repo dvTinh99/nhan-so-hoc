@@ -28,11 +28,16 @@ Route::get('/dang-nhap', function () {
 Route::get('/doi-mat-khau', function () {
     return view('pages.doi-mat-khau');
 });
+Route::get('/quen-mat-khau', function () {
+    return view('pages.quen-mat-khau');
+});
 
 Route::get('/dang-xuat', [UserController::class, 'logout'])->name('logout');
 
 // resgister
 
+Route::post('/doi-mat-khau', [UserController::class, 'changePassword'])->name('change-password');
+Route::post('/quen-mat-khau', [UserController::class, 'forgotPassword'])->name('forgot-password');
 Route::post('/dang-ki', [UserController::class, 'register'])->name('register');
 Route::post('/dang-nhap', [UserController::class, 'login'])->name('login');
 
@@ -75,13 +80,12 @@ Route::get('/lich-su-thanh-toan', function () {
 });
 
 // pages admin
-Route::prefix('/admin')->group(function () {
+Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/quan-li-tai-khoan', [AdminController::class, 'listUsers']);
 
     Route::get('/quan-li-tra-cuu', function () {
         return view('pages.admin.quan-li-tra-cuu');
     });
+
+    Route::get('/user/delete/{id}', [AdminController::class, 'deleteUser'])->name('user.delete');
 });
-
-
-
