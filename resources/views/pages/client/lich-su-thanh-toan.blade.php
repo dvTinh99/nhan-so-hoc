@@ -2,7 +2,7 @@
 <div class="header-mobile" id="menu-box">
     <div class="menu-mobile">
         <ul>
-            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="/">Trang chủ</a></li>
 
             <li>
                 <a class=" drop-down" data-bs-toggle="collapse" data-bs-target="#components-collapse" aria-expanded="false" aria-current="true">
@@ -112,17 +112,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Vo Van Nho</td>
-                            <td>0814213949</td>
-                            <td>Gói 1</td>
-                            <td>1</td>
-                            <td>119,000</td>
-                            <td><span class="text-danger">Đang xử lý</span></td>
-                            <td>08/11/2022</td>
+                        @foreach ($paymentHistory as $key => $payment)
+                            <tr>
+                                <td>{{ ++$key }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->phone }}</td>
+                                <td>{{ $payment->name_pack }}</td>
+                                <td>{{ $payment->turn }}</td>
+                                <td>{{ number_format($payment->price, 0, ',', '.')}}</td>
+                                <td><span class="text-danger">{{ config('status-parse')[$payment->status] }}</span></td>
+                                <td>{{ $payment->created_at }}</td>
 
-                        </tr>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
                 <div>
@@ -132,3 +134,6 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>

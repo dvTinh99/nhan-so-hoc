@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Models\PaymentHistory;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -76,8 +79,38 @@ Route::get('/lich-su-tra-cuu', function () {
     return view('pages.client.lich-su-tra-cuu');
 });
 Route::get('/lich-su-thanh-toan', function () {
-    return view('pages.client.lich-su-thanh-toan');
+    $user = Auth::user();
+    $paymentHistory = $user->payment_histories;
+    return view('pages.client.lich-su-thanh-toan', compact('paymentHistory', 'user'));
 });
+
+Route::get('/thanh-toan', function () {
+    $bankOwner = config('bank');
+    return view('pages.client.thanh_toan.thanh-toan', compact('bankOwner'));
+})->middleware('auth');
+
+Route::post('/thanh-toan', function (Request $request)
+{
+    $price = $request->price;
+    $turn = $request->turn;
+    $name_pack = $request->name_pack;
+    $bankOwner = config('bank');
+    return view('pages.client.thanh_toan.thanh-toan', compact('bankOwner', 'price', 'turn', 'name_pack'));
+})->middleware('auth');
+
+Route::post('/luu-thanh-toan', function (Request $request)
+{
+    // dd($request->all());
+    $paymentHistory = PaymentHistory::create([
+        'user_id' => Auth::id(),
+        'name_pack' => $request->name_pack,
+        'turn' => $request->turn,
+        'price' => $request->price,
+        'status' => config('status.PENDING'),
+    ]);
+    // dd($paymentHistory);
+    return redirect()->route('index');
+})->middleware('auth');
 
 // pages admin
 Route::prefix('/admin')->middleware('auth')->group(function () {
@@ -87,7 +120,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
         return view('pages.admin.quan-li-tra-cuu');
     });
     Route::get('/quan-li-thanh-toan', function () {
-        return view('pages.admin.quan-li-thanh-toan');
+        $paymentHistorys = PaymentHistory::with('user')->get();
+        return view('pages.admin.quan-li-thanh-toan', compact('paymentHistorys'));
     });
 
     Route::get('/user/delete/{id}', [AdminController::class, 'deleteUser'])->name('user.delete');
