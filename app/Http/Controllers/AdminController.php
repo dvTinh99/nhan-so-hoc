@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PaymentHistory;
 use App\Models\User;
 
 class AdminController extends Controller
@@ -14,6 +15,12 @@ class AdminController extends Controller
     public function deleteUser($id)
     {
         User::destroy($id);
+        return redirect()->back();
+    }
+
+    public function deletePayment($id)
+    {
+        PaymentHistory::destroy($id);
         return redirect()->back();
     }
 }

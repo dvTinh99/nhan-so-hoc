@@ -125,4 +125,5 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     });
 
     Route::get('/user/delete/{id}', [AdminController::class, 'deleteUser'])->name('user.delete');
+    Route::get('/payment/delete/{id}', [AdminController::class, 'deletePayment'])->name('payment.delete');
 });
