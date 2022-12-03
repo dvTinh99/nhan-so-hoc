@@ -31,12 +31,18 @@
                                 <td>{{ $payment->name_pack }}</td>
                                 <td>{{ $payment->turn }}</td>
                                 <td>{{ number_format($payment->price, 0, ',', '.')}}</td>
-                                <td><span class="text-danger">{{ config('status-parse')[$payment->status] }}</span></td>
+                                @if($payment->status == 1)
+                                    <td><span class="text-danger">{{ config('status-parse')[$payment->status] }}</span></td>
+                                @elseif($payment->status == 2)
+                                    <td><span class="text-success">{{ config('status-parse')[$payment->status] }}</span></td>
+                                @endif
                                 <td>{{ $payment->created_at }}</td>
-                                <td><svg style="width: 20px; color: green;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 011.04-.208z" clip-rule="evenodd"></path>
-                                    </svg>
-
+                                <td>
+                                    <a href="{{ route('payment.approve', ['id' => $payment->id]) }}">
+                                        <svg style="width: 20px; color: green;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 011.04-.208z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </a>
                                 </td>
                                 <td>
                                     <a href="{{ route('payment.delete', ['id' => $payment->id]) }}">

@@ -1,7 +1,8 @@
 @include('layouts.header')
     <main id="main">
         <div class="mg-lg-150 mg-100"></div>
-        <form method="post" action="NhanSoHoc" stlye="background-color:red">
+        <form method="post" action="/luu-lich-su-tra-cuu" stlye="background-color:red">
+            @csrf
             <div class="container">
                 <div class="row rounded-20 bd  bd-1 pd-10 mg-1">
                     <div class="col-12 form-group" style="width:inherit">

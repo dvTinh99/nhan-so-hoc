@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SeekController;
 use App\Http\Controllers\UserController;
 use App\Models\PaymentHistory;
+use App\Models\Seek;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -76,8 +78,11 @@ Route::get('/y-nghia-so-bieu-dat', function () {
 });
 
 Route::get('/lich-su-tra-cuu', function () {
-    return view('pages.client.lich-su-tra-cuu');
+    $seeks = Seek::where('user_id', Auth::id())->get();
+    return view('pages.client.lich-su-tra-cuu', compact('seeks'));
+
 });
+Route::post('/luu-lich-su-tra-cuu', [SeekController::class, 'create']);
 Route::get('/lich-su-thanh-toan', function () {
     $user = Auth::user();
     $paymentHistory = $user->payment_histories;
@@ -117,7 +122,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/quan-li-tai-khoan', [AdminController::class, 'listUsers']);
 
     Route::get('/quan-li-tra-cuu', function () {
-        return view('pages.admin.quan-li-tra-cuu');
+        $seeks = Seek::all();
+        return view('pages.admin.quan-li-tra-cuu', compact('seeks'));
     });
     Route::get('/quan-li-thanh-toan', function () {
         $paymentHistorys = PaymentHistory::with('user')->get();
@@ -126,4 +132,5 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     Route::get('/user/delete/{id}', [AdminController::class, 'deleteUser'])->name('user.delete');
     Route::get('/payment/delete/{id}', [AdminController::class, 'deletePayment'])->name('payment.delete');
+    Route::get('/payment/approve/{id}', [AdminController::class, 'approvePayment'])->name('payment.approve');
 });

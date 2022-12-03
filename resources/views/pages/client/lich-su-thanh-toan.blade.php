@@ -120,7 +120,11 @@
                                 <td>{{ $payment->name_pack }}</td>
                                 <td>{{ $payment->turn }}</td>
                                 <td>{{ number_format($payment->price, 0, ',', '.')}}</td>
-                                <td><span class="text-danger">{{ config('status-parse')[$payment->status] }}</span></td>
+                                @if($payment->status == 1)
+                                    <td><span class="text-danger">{{ config('status-parse')[$payment->status] }}</span></td>
+                                @elseif($payment->status == 2)
+                                    <td><span class="text-success">{{ config('status-parse')[$payment->status] }}</span></td>
+                                @endif
                                 <td>{{ $payment->created_at }}</td>
 
                             </tr>

@@ -26,8 +26,8 @@
                                 <td>{{ $user->name ?? '-' }}</td>
                                 <td>{{ $user->email ?? '-'}}</td>
                                 <td>{{ $user->phone ?? '-'}}</td>
-                                <td>{{ $user->count_search }}</td>
-                                <td><span class="text-danger"> {{ env('TOTAL_FREE_SEARCH') - $user->count_search }}</span></td>
+                                <td>{{ $user->turn_used }}</td>
+                                <td><span class="text-danger"> {{ $user->turn_remaining }}</span></td>
                                 <td>
                                     <a href="{{ route('user.delete', ['id'=> $user->id]) }}">
                                         <svg style="width: 20px;color: red;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

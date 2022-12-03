@@ -30,7 +30,7 @@ class UserController extends Controller
                };
             }
         } catch (\Exception $e) {
-            return redirect()->back()->whth('error', $e->getMessage);
+            return redirect()->back()->with('error', $e->getMessage());
         }
 
     }

@@ -23,4 +23,14 @@ class AdminController extends Controller
         PaymentHistory::destroy($id);
         return redirect()->back();
     }
+
+    public function approvePayment($id)
+    {
+        $paymentHistory = PaymentHistory::find($id);
+        $user = $paymentHistory->user;
+        $user->turn_remaining += $paymentHistory->turn;
+        $user->save();
+        $paymentHistory->update(['status' => config('status.APPROVE')]);
+        return redirect()->back();
+    }
 }

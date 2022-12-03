@@ -19,15 +19,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Võ Van nhó</td>
-                            <td>24/02/1998</td>
-                            <td>05/11/2022</td>
-                            <td>
-                                <a href="tracuu.html">Tra cứu</a>
-                            </td>
-                        </tr>
+                        @foreach ($seeks as $key => $seek)
+                            <tr>
+                                <td>{{ ++$key }}</td>
+                                <td>{{ $seek->name }}</td>
+                                <td>{{ $seek->birthday }}</td>
+                                <td>{{ $seek->created_at }}</td>
+                                <td>
+                                    <a href="tracuu.html">Tra cứu</a>
+                                </td>
+                            </tr>
+                        @endforeach
 
                     </tbody>
                 </table>

@@ -81,7 +81,7 @@
                                             </svg> Thông tin cá nhân</div>
                                         <div class="menu-box">
                                             <a> {{ Auth::user()->email }}</a>
-                                            <a> Số lượt tra cứu: <strong class="text-primary">0
+                                            <a> Số lượt tra cứu: <strong class="text-primary"> {{ Auth::user()->turn_remaining }}
                                                     lượt</strong></a>
                                             <a href="/lich-su-tra-cuu"> Xem lịch sử tra
                                                 cứu</a>
